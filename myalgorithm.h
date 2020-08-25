@@ -60,9 +60,31 @@ ListNode * initList(int t, T...r)
 
 TreeNode* BBT(vector<int> &data);       // 根据data中的数据构建一个棵平衡二叉树并返回根节点
 
+int kmp(string str, string pattern);    // 返回模式子串在str中的起始位置
+int maxcompresuf(string);
 
 
+/*
+vector<vector<int>> ans;
+vector<int> temp;
+void dfsenum(int cur, vector<int> &nums)    // 枚举子序列的模板
+{
+    if (cur == nums.size()) {
+        if (isValid() && isRepeat())   // 判断合法以及是否重复
+        {
+            ans.push_back(temp);
+        }
+    }
 
+    // 加入当前元素
+    temp.push_back(nums[cur]);
+    dfsenum(cur + 1, nums);
+    // 不加入当前元素
+    temp.pop_back();
+    dfsenum(cur + 1, nums);
+
+
+}*/
 
 
 

@@ -217,6 +217,59 @@ TreeNode* BBT(vector<int> &data)
     return rtn;
 }
 
+int kmp(string str, string pattern)
+{
+    // https://www.bilibili.com/video/BV1jb411V78H/
+    // 先求出next数组
+    vector<int> next(pattern.length(),0);
+    for (int i = 0; i < next.size(); i++)
+    {
+        int nextval = maxcompresuf(string(pattern.begin(), pattern.begin() + i));
+        next[i] = nextval;
+    }
+
+    int i = 0; int j = 0;
+    for (; j < pattern.length()&&i<str.length();) {
+        if (str[i] != pattern[j]) {
+            // 不相等之后，使用j的第next[j]个字符继续和str[i]进行比较
+            j = next[j];
+            if (j == 0) { i++; }
+        }
+        else {
+            i++; j++;
+        }
+    }
+    if (j == pattern.length())
+        return i - j;
+    return -1;
+}
+
+int maxcompresuf(string str)
+{
+    // 得到str的最长公共前后缀,前缀后缀的长度小于str的长度
+    // 返回最长公公前后缀的长度
+    if (str.length() <= 1)
+        return 0;
+    int rtn;
+    int len = str.length();
+    for (rtn = len-1; rtn >=1; rtn--)
+    {
+        int i;
+        for (i = 0; i < rtn; i++)
+        {
+            if (str[i] == str[len - rtn+i]) {
+                continue;
+            }
+            else {
+                break;
+            }
+        }
+        if (i == rtn)
+            return rtn;
+    }
+}
+
+
 
 
 
